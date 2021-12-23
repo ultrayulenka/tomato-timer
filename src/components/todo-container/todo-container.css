@@ -1,0 +1,115 @@
+.todo-container {
+    flex: 30%;
+    padding-right: 2%;
+    padding-left: 2%;
+}
+
+.section-title {
+    font-size: 1.75em;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+.todo-list {
+    list-style: none;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-list__item {
+    font-size: 1em;
+    padding: 0.15rem 0.5rem;
+    border: 1px solid #CCB4B4;
+    border-radius: 0.25em;
+    box-shadow: 0px 0px 8px 0px #d8c5c586;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.todo-list .text {
+    cursor: pointer;
+}
+
+.todo-list__item.done {
+    text-decoration: line-through;
+}
+
+.todo-list__item.important {
+    color: #6e2121;
+    border-color: #6e2121;
+    font-weight: bold; 
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.btn-sm {
+    margin: 3px;
+    width: 30px;
+    padding: 0.25rem 0.25rem;
+    font-size: .75rem;
+    border-radius: 0.2rem;
+    background-color: inherit;
+}
+
+.btn_success {
+    color: #54BA89;
+    border: 1px solid #54BA89;
+    transition: ease-out 0.25s;
+}
+
+.btn_success:hover {
+    color: #FFFFFF;
+    background-color: #54BA89;
+}
+
+.btn_danger {
+    color: #DE3E3E;
+    border: 1px solid #DE3E3E;
+    transition: ease-out 0.25s;
+}
+
+.btn_danger:hover {
+    color: #FFFFFF;
+    background-color: #DE3E3E;
+}
+
+.form {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+}
+
+.form__input {
+    border: none;
+    background-color: inherit;
+    padding: 0.25rem 0.75rem;
+    color: inherit;
+    font-size: 1rem;
+    width: 78%;
+    box-shadow: 0px 0px 8px 0px #d8c5c586;
+    border-radius: 0.2rem;
+    background-color: #FFFFFF;
+}
+
+.form__input:focus {
+    outline: none;
+    box-shadow: 0px 0px 8px 0px #f7d3857c;
+}
+
+.form__btn {
+    background-color: #845E5E;
+    border: none;
+    font-size: 1rem;
+    color: #FFFFFF;
+    width: 20%;
+    text-transform: uppercase;
+    font-weight: bold;
+    box-shadow: 0px 0px 8px 0px #d8c5c586;
+    border-radius: 0.2rem;
+}
