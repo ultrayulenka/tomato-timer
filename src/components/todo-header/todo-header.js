@@ -1,6 +1,7 @@
 import './todo-header.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEraser } from '@fortawesome/free-solid-svg-icons';
+import Button from '../button';
 
 function TodoHeader({ todo = 0, all = 0, clearClick = () => {} }) {
     const done = all - todo;
@@ -10,10 +11,13 @@ function TodoHeader({ todo = 0, all = 0, clearClick = () => {} }) {
         <h3 className="todo-header__text">{`${todo} more to do, ${done} done`}</h3>
         {
             done > 0 && 
-            <button className="btn btn_sm btn_info btn-clear"
+            <Button
+                className='btn-clear'
+                size='sm'
+                color='info'
                 onClick={clearClick}>
                 <FontAwesomeIcon icon={faEraser} />
-            </button>
+            </Button>
         }
     </div>
   );

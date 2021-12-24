@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import Button from '../button';
 import './input-form.scss';
 
 function InputForm({ onSubmit }) {
@@ -11,7 +12,12 @@ function InputForm({ onSubmit }) {
             inputEl.current.value = '';
         }}>
             <input className="form__input" ref={inputEl} placeholder="Type here" type="text"/>
-            <button className="form__btn btn btn_info" type="submit">Add</button>
+            <Button
+                className='form__btn'
+                color='info'
+                type='submit'>
+                Add
+            </Button>
         </form>
     );
   }

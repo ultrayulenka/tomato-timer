@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamation, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import Button from '../button';
 import './task.css'
 
 function Task({ id, title, deleteTask, toggleDone, toggleImportant }) {
@@ -8,14 +9,18 @@ function Task({ id, title, deleteTask, toggleDone, toggleImportant }) {
             <span className="text"
                 onClick={() => toggleDone(id)}>{title}</span>
             <div className="btn-group">
-                <button className="btn btn_sm btn_success"
+                <Button
+                    size='sm'
+                    color='success'
                     onClick={() => toggleImportant(id)}>
                     <FontAwesomeIcon icon={faExclamation} />
-                </button>
-                <button className="btn btn_sm btn_danger"
-                    onClick={() => deleteTask(id)}>
+                </Button>
+                <Button
+                    size='sm'
+                    color='danger'
+                    onClick={() => toggleImportant(id)}>
                     <FontAwesomeIcon icon={faTrashAlt} />
-                </button>
+                </Button>
             </div>
         </>
     );

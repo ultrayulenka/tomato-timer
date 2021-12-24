@@ -1,0 +1,46 @@
+.btn {
+    cursor: pointer;
+
+    &_sm {
+        margin: 3px;
+        width: 30px;
+        padding: 0.25rem 0.25rem;
+        font-size: .75rem;
+        border-radius: 0.2rem;
+        background-color: inherit;
+    }
+
+    &_success {
+        color: #54BA89;
+        border: 1px solid #54BA89;
+        transition: ease-out 0.25s;
+
+        &:hover {
+            color: #FFFFFF;
+            background-color: #54BA89;
+        }
+    }
+
+    &_danger {
+        color: #DE3E3E;
+        border: 1px solid #DE3E3E;
+        transition: ease-out 0.25s;
+
+        &:hover {
+            color: #FFFFFF;
+        background-color: #DE3E3E;
+        }
+    }
+
+    &_info {
+        background-color: #845E5E;
+        border: none;
+        font-size: 1rem;
+        color: #FFFFFF;
+        transition: 1s;
+
+        &:hover {
+            background-color: #a17474;
+        }
+    }
+}
