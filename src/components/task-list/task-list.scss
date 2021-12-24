@@ -14,19 +14,19 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 5px;
+
+        &.done {
+            text-decoration: line-through;
+        }
+    
+        &.important {
+            color: #6e2121;
+            border-color: #6e2121;
+            font-weight: bold;
+        }
     }
 
     .text {
         cursor: pointer;
-    }
-
-    &.done {
-        text-decoration: line-through;
-    }
-
-    &.important {
-        color: #6e2121;
-        border-color: #6e2121;
-        font-weight: bold;
     }
 }
