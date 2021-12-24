@@ -1,0 +1,50 @@
+.todo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+
+    &__text {
+        font-weight: normal;
+        padding: 6px 0;
+        font-size: 1rem;
+    }
+}
+
+.btn-clear {
+    position: relative;
+
+    &::before, &::after {
+        position: absolute;
+        pointer-events: none; 
+        opacity: 0; 
+        transition: 1s opacity;
+    }
+
+    &::before {
+        content: "";
+        width: 0;
+        height: 0;
+        border: 8px solid transparent;
+        border-top-color: #CCB4B4;
+        top: 0;
+        left: calc(75% - 8px); 
+        transform: rotate(45deg);
+    }
+
+    &::after {
+        content: 'Remove done tasks';
+        width: 70px;
+        left: 75%; 
+        top: -120%;
+        background-color:  #CCB4B4;
+        border-radius: 1em;
+        font-size: 0.75rem;
+        padding: 0.5em;
+    }
+
+    &:hover::before,
+    &:hover::after {
+        opacity: 1; 
+    }
+}

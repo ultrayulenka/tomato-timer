@@ -1,8 +1,9 @@
-import './todo-container.css';
-import TaskList from '../tasks-list';
+import './todo-container.scss';
+import TaskList from '../task-list';
 import InputForm from '../input-form';
+import TodoHeader from '../todo-header';
 import { v4 as uuidv4 } from 'uuid';
-import { useState } from 'react/cjs/react.development';
+import { useState } from 'react';
 
 function TodoContainer() {
     const [tasks, setTasks ] = useState([]);
@@ -25,6 +26,10 @@ function TodoContainer() {
         setTasks(prev => prev.filter(item => item.id !== id))
     }
 
+    const removeDone = () => {
+        setTasks(prev => prev.filter(task => !task.done));
+    }
+
     const toggleProperty = (({property, id}) => {
         setTasks(prev => {
             return prev.map(item => {
@@ -45,6 +50,10 @@ function TodoContainer() {
     return (
     <section className="app__section todo-container">
         <h2 className="section-title">Todo List</h2>
+        <TodoHeader 
+            todo={tasks.filter(task => !task.done).length}
+            all={tasks.length}
+            clearClick={removeDone}/>
         <TaskList 
             list={tasks} 
             deleteTask={deleteTask}

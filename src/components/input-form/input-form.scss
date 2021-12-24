@@ -1,0 +1,43 @@
+.form {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+
+    &__input {
+        border: none;
+        background-color: inherit;
+        padding: 0.25rem 0.75rem;
+        color: inherit;
+        font-size: 1rem;
+        width: 78%;
+        box-shadow: 0px 0px 8px 0px #d8c5c586;
+        border-radius: 0.2rem;
+        background-color: #FFFFFF;
+
+        &:focus {
+            outline: none;
+            box-shadow: 0px 0px 8px 0px #f7d3857c;
+        }
+    }
+
+    &__btn {
+        width: 20%;
+        text-transform: uppercase;
+        font-weight: bold;
+        box-shadow: 0px 0px 8px 0px #d8c5c586;
+        border-radius: 0.2rem;
+    }
+}
+
+.btn_info {
+    background-color: #845E5E;
+    border: none;
+    font-size: 1rem;
+    color: #FFFFFF;
+    transition: 1s;
+}
+
+.btn_info:hover {
+    background-color: #a17474;
+}

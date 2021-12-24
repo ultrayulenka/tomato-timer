@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import './input-form.scss';
 
 function InputForm({ onSubmit }) {
     const inputEl = useRef(null);
