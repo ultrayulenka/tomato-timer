@@ -1,60 +1,86 @@
 import './timer-container.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBackward, faForward, faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 function TimerContainer() {
-    const [time, setTime] = useState({min: 1, sec: 10})
-    const [periods, setPeriods] = useState([
+    const periods = useMemo(() => [
         {
             name: 'Work',
-            isOn: true
+            duration: {
+                min: 1,
+                sec: 5
+            }
         },
         {
             name: 'Break',
-            isOn: false
+            duration: {
+                min: 0,
+                sec: 5
+            }
         },
         {
             name: 'Rest',
-            isOn: false
+            duration: {
+                min: 0,
+                sec: 30
+            }
         }
     ]);
 
-    const [isRunning, setIsRunning] = useState(true);
-    
-    useEffect(() => {
-        if(isRunning) {
-            const interval = setInterval(() => {
-                setTime(prev => {
-                    const { min, sec } = prev;
+    const [clock, setClock] = useState({
+        isRunning: true,
+        activePeriod: 0,
+        time: {...periods[0].duration}
+    });
 
+    useEffect(() => {
+        if(clock.isRunning) {
+            const interval = setInterval(() => {
+                setClock(prev => {
+                    const { time: { min, sec } } = prev;
                     if(sec > 0) {
                         return {
-                            min,
-                            sec: sec - 1
+                            ...prev,
+                            time: {
+                                min,
+                                sec: sec - 1
+                            }
                         }
                     } else if(min > 0) {
                         return {
-                            min: min - 1,
-                            sec: 59
+                            ...prev,
+                            time: {
+                                min: min - 1,
+                                sec: 59
+                            }
                         }
                     } else {
-                        setIsRunning(false);
                         return {
-                            min: 0,
-                            sec: 0
+                            ...prev,
+                            isRunning: false,
+                            time: {
+                                min: 0,
+                                sec: 0
+                            }
                         }
                     }
-                })
+                });
             }, 1000)
 
             return () => clearInterval(interval)
-        } 
-
-        return undefined;
-
-    }, [isRunning])
-
+        } else {
+            setClock(prev => {
+                const newActive = prev.activePeriod < 2? prev.activePeriod + 1 : 0;
+                return {
+                    prev,
+                    isRunning: true,
+                    activePeriod: newActive,
+                    time: {...periods[newActive].duration}
+                }
+            })
+        }
+    }, [clock.isRunning, periods])
 
   return (
     <section className="app__section timer-container">
@@ -62,19 +88,19 @@ function TimerContainer() {
         <div className="timer">
             <div className="clock-box">
                 <div className="clock">
-                    <span className="minutes">{time.min < 10? `0${time.min}` : time.min}</span>
+                    <span className="minutes">{clock.time.min < 10? `0${clock.time.min}` : clock.time.min}</span>
                     <span>:</span>
-                    <span className="seconds">{time.sec < 10? `0${time.sec}` : time.sec}</span>
+                    <span className="seconds">{clock.time.sec < 10? `0${clock.time.sec}` : clock.time.sec}</span>
                 </div>
             </div>
             <div className='timer__controls'>
                 <ul className='timer__switch'>
                     {
-                        periods.map(({name, isOn}) => (
+                        periods.map(({name}, index) => (
                             <li
                                 key={name}
                                 className={`timer__state
-                                ${isOn? 'timer__state_current' : ''}`}>
+                                ${clock.activePeriod === index? 'timer__state_current' : ''}`}>
                                 {name}
                             </li>
                         ))
@@ -85,8 +111,8 @@ function TimerContainer() {
                         <FontAwesomeIcon className='controls__icon' icon={faBackward}/>
                     </button>
                     <button className='pause-btn'
-                        onClick={() => setIsRunning(prev => !prev)}>
-                        <FontAwesomeIcon  className='controls__icon' icon={isRunning? faPause : faPlay}/>
+                        onClick={() => setClock(prev => {return {...prev, isRunning: !prev.isRunning}})}>
+                        <FontAwesomeIcon  className='controls__icon' icon={clock.isRunning? faPause : faPlay}/>
                     </button>
                     <button className='play-btn'>
                         <FontAwesomeIcon className='controls__icon' icon={faForward}/>
