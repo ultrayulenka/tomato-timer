@@ -1,4 +1,4 @@
-import './app.css';
+import './app.scss';
 import TodoContainer from '../todo-container';
 import TimerContainer from '../timer-container';
 

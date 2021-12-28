@@ -1,0 +1,96 @@
+.timer-container {
+    flex: 70%;
+    background-color: #FA8888;
+    padding-left: 45px;
+    padding-right: 45px;
+}
+
+.timer {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    height: 40vh;
+    background-color: #f5e5e581;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding-left: 20px;
+
+    &__controls {
+        width: 100%;
+    }
+
+    &__switch {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 2px 0;
+    }
+
+    &__state {
+        width: 33%;
+        background-color: #F76C6C;
+        color: #FFFFFF;
+        display: block;
+        padding: 1.75vh 0;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+
+        &_current {
+            background-color: #FFFFFF;
+            color: #F76C6C;
+        }
+    }
+}
+
+.clock-box {
+    padding-right: 20px;
+    border-right: 1px solid #FFFFFF;
+}
+
+.clock {
+    margin-top: 2vh;
+    border-radius: 50%;
+    height: 35vh;
+    width: 35vh;
+    background-color: #f547479f;
+    display: flex;
+    justify-content: center;
+    padding-top: 10vh;
+    color: #FFFFFF;
+    font-size: 3rem;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    margin: 0 auto;
+
+    &__icon {
+        cursor: pointer;
+    }
+}
+
+.pause-btn {
+    font-size: 3.5rem;
+    padding: 0 5px;
+   /* border: 2px solid #FFFFFF;*/
+    border: none;
+    background: none;
+    color: #FFFFFF;
+}
+
+.play-btn {
+    background: none;
+    color: #FFFFFF;
+    border-radius: 50%;
+    border: none;
+    font-size: 3.5rem;
+}
+
+.play-btn__icon_left {
+    transform: scaleX(-1)
+} 
+
