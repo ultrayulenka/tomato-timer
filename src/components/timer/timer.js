@@ -41,26 +41,26 @@ function Timer() {
         current: 'Work'
     });
 
-    const getUpdatedRounds = (rounds) => {
+    const getNextRound = () => {
         if(rounds.current === 'Break' || rounds.current === 'Rest') {
-            return {
-                ...rounds,
-                current: 'Work'
-            }
+            return 'Work'
         } else {
-            const newCurrent = (rounds.done + 1) % rounds.betweenRest === 0? 'Rest' : 'Break';
-            return {
-                ...rounds,
-                done: rounds.done + 1,
-                current: newCurrent
-            }
+            return (rounds.done + 1) % rounds.betweenRest === 0? 'Rest' : 'Break';
+        }
+    }
+
+    const getUpdatedRounds = (rounds, isWorkCompleted = false) => {
+        return {
+            ...rounds,
+            done: isWorkCompleted? rounds.done + 1 : rounds.done,
+            current: getNextRound()
         }
     }
 
     const skipRound = () => {
         setIsRunning(false);
         setRounds(prev => {
-            return getUpdatedRounds(prev);
+            return getUpdatedRounds(prev, true);
         })
     }
 
@@ -77,7 +77,7 @@ function Timer() {
         if(time.min === 0 && time.sec === 0) {
             setIsRunning(false);
             setRounds(prev => {
-                return getUpdatedRounds(prev);
+                return getUpdatedRounds(prev, prev.current === 'Work');
             })
         }
     }, [time])
@@ -115,7 +115,16 @@ function Timer() {
             <div className='timer__controls'>
                 <Intervals 
                     intervals={intervals}
-                    current={rounds.current}/>
+                    current={rounds.current}
+                    onChangeInterval={(interval) => {
+                        setRounds(prev => {
+                            return {
+                                ...prev,
+                                current: interval
+                            }
+                        });
+                        restartRound();
+                    }}/>
                 <Controls 
                     isRunning={isRunning}
                     onPauseClick={() => setIsRunning(prev => !prev)}

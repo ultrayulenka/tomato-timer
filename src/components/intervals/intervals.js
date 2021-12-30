@@ -1,18 +1,18 @@
 import './intervals.scss';
 
-function Intervals({ intervals = [], current = ''}) {
-    //console.log(intervals, current);
+function Intervals({ intervals = [], current = '', onChangeInterval = () => {}}) {
 
     return (
         intervals.length?
         <ul className='timer__switch'>
             {
-                intervals.map(({name}) => (
+                intervals.map((interval) => (
                     <li
-                        key={name}
+                        key={interval.name}
                         className={`timer__state
-                        ${current === name? 'timer__state_current' : ''}`}>
-                        {name}
+                        ${current === interval.name? 'timer__state_current' : ''}`}
+                        onClick={() => onChangeInterval(interval.name)}>
+                        {interval.name}
                     </li>
                 ))
             }
