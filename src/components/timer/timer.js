@@ -41,6 +41,34 @@ function Timer() {
         current: 'Work'
     });
 
+    const getUpdatedRounds = (rounds) => {
+        if(rounds.current === 'Break' || rounds.current === 'Rest') {
+            return {
+                ...rounds,
+                current: 'Work'
+            }
+        } else {
+            const newCurrent = (rounds.done + 1) % rounds.betweenRest === 0? 'Rest' : 'Break';
+            return {
+                ...rounds,
+                done: rounds.done + 1,
+                current: newCurrent
+            }
+        }
+    }
+
+    const skipRound = () => {
+        setIsRunning(false);
+        setRounds(prev => {
+            return getUpdatedRounds(prev);
+        })
+    }
+
+    const restartRound = () => {
+        setIsRunning(false);
+        setTime({...intervals.find(interval => interval.name === rounds.current).duration})
+    }
+
     useEffect(() => {
         setTime({...intervals.find(interval => interval.name === rounds.current).duration})
     }, [rounds]);
@@ -49,20 +77,7 @@ function Timer() {
         if(time.min === 0 && time.sec === 0) {
             setIsRunning(false);
             setRounds(prev => {
-                console.log(prev);
-                if(prev.current === 'Break' || prev.current === 'Rest') {
-                    return {
-                        ...prev,
-                        current: 'Work'
-                    }
-                } else {
-                    const newCurrent = (rounds.done + 1) % rounds.betweenRest === 0? 'Rest' : 'Break';
-                    return {
-                        ...prev,
-                        done: prev.done + 1,
-                        current: newCurrent
-                    }
-                }
+                return getUpdatedRounds(prev);
             })
         }
     }, [time])
@@ -103,11 +118,13 @@ function Timer() {
                     current={rounds.current}/>
                 <Controls 
                     isRunning={isRunning}
-                    onPauseClick={() => setIsRunning(prev => !prev)}/>
+                    onPauseClick={() => setIsRunning(prev => !prev)}
+                    onNextClick={skipRound}
+                    onPrevClick={restartRound}/>
                 <RoundsIndicator 
                     all={rounds.all}
                     done={rounds.done}
-                    tillRest={rounds.betweenRest - rounds.done % rounds.betweenRest}/>
+                    tillRest={rounds.current === 'Rest'? 0 : rounds.betweenRest - rounds.done % rounds.betweenRest}/>
             </div>
         </div>
     );
