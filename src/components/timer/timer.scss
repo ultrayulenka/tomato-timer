@@ -1,0 +1,29 @@
+.timer {
+    width: 90%;
+    background-color: #f5e5e581;
+    margin-top: 20px;
+
+    &__controls {
+        width: 100%;
+    }
+
+    &__switch {
+        width: 100%;
+    }
+
+    &__state {
+        width: 33%;
+        background-color: #F76C6C;
+        color: #FFFFFF;
+        display: block;
+        padding: 1.75vh 0;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+
+        &_current {
+            background-color: #FFFFFF;
+            color: #F76C6C;
+        }
+    }
+}

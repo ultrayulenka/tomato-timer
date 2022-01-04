@@ -4,6 +4,7 @@ import InputForm from '../input-form';
 import TodoHeader from '../todo-header';
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
+import { Container } from 'react-bootstrap';
 
 function TodoContainer() {
     const [tasks, setTasks ] = useState([]);
@@ -49,17 +50,19 @@ function TodoContainer() {
 
     return (
     <section className="app__section todo-container">
-        <h2 className="section-title">Todo List</h2>
-        <TodoHeader 
-            todo={tasks.filter(task => !task.done).length}
-            all={tasks.length}
-            clearClick={removeDone}/>
-        <TaskList 
-            list={tasks} 
-            deleteTask={deleteTask}
-            toggleDone={toggleDone}
-            toggleImportant={toggleImportant}/>
-        <InputForm onSubmit={addTask} />
+        <Container>
+            <h2 className="section-title">Todo List</h2>
+            <TodoHeader 
+                todo={tasks.filter(task => !task.done).length}
+                all={tasks.length}
+                clearClick={removeDone}/>
+            <TaskList 
+                list={tasks} 
+                deleteTask={deleteTask}
+                toggleDone={toggleDone}
+                toggleImportant={toggleImportant}/>
+            <InputForm onSubmit={addTask} />
+        </Container>
     </section>
     );
 }

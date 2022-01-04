@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamation, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import Button from '../button';
+//import Button from '../button';
+import { Button } from 'react-bootstrap'
 import './task.css'
 
 function Task({ id, title, deleteTask, toggleDone, toggleImportant }) {
@@ -8,17 +9,14 @@ function Task({ id, title, deleteTask, toggleDone, toggleImportant }) {
         <>
             <span className="text"
                 onClick={() => toggleDone(id)}>{title}</span>
-            <div className="btn-group">
-                <Button
-                    size='sm'
-                    color='success'
+            <div className='buttons'>
+                <Button size="sm" variant="outline-primary"
+                    className="me-1"
                     onClick={() => toggleImportant(id)}>
                     <FontAwesomeIcon icon={faExclamation} />
                 </Button>
-                <Button
-                    size='sm'
-                    color='danger'
-                    onClick={() => toggleImportant(id)}>
+                <Button size="sm" variant="outline-danger"
+                    onClick={() => deleteTask(id)}>
                     <FontAwesomeIcon icon={faTrashAlt} />
                 </Button>
             </div>

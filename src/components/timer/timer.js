@@ -5,6 +5,7 @@ import Controls from '../controls';
 import RoundsIndicator from '../rounds-indicator';
 import { useState } from 'react';
 import { useEffect } from 'react/cjs/react.development';
+import { Container, Row, Col } from 'react-bootstrap'
 
 function Timer() {
     const [isRunning, setIsRunning] = useState(false);
@@ -106,13 +107,8 @@ function Timer() {
     }
 
     return (
-        <div className="timer">
-            <Clock 
-                min={time.min}
-                sec={time.sec}
-                isRunning={isRunning}
-                changeTime={changeTime} />
-            <div className='timer__controls'>
+        <Container className="timer p-0">
+            <Row>
                 <Intervals 
                     intervals={intervals}
                     current={rounds.current}
@@ -125,17 +121,27 @@ function Timer() {
                         });
                         restartRound();
                     }}/>
-                <Controls 
-                    isRunning={isRunning}
-                    onPauseClick={() => setIsRunning(prev => !prev)}
-                    onNextClick={skipRound}
-                    onPrevClick={restartRound}/>
-                <RoundsIndicator 
-                    all={rounds.all}
-                    done={rounds.done}
-                    tillRest={rounds.current === 'Rest'? 0 : rounds.betweenRest - rounds.done % rounds.betweenRest}/>
-            </div>
-        </div>
+                <Col md={5}>
+                    <Clock
+                        min={time.min}
+                        sec={time.sec}
+                        isRunning={isRunning}
+                        changeTime={changeTime} />
+                    <div className='timer__controls'></div>
+                </Col>
+                <Col md={7}>
+                    <Controls 
+                        isRunning={isRunning}
+                        onPauseClick={() => setIsRunning(prev => !prev)}
+                        onNextClick={skipRound}
+                        onPrevClick={restartRound}/>
+                    <RoundsIndicator 
+                        all={rounds.all}
+                        done={rounds.done}
+                        tillRest={rounds.current === 'Rest'? 0 : rounds.betweenRest - rounds.done % rounds.betweenRest}/>
+                </Col>
+            </Row>
+        </Container>
     );
 }
 

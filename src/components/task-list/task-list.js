@@ -1,28 +1,31 @@
 import './task-list.scss';
-import Task from '../task'
+import Task from '../task';
+import { ListGroup } from 'react-bootstrap'
 
 function TaskList({ list, deleteTask, toggleDone, toggleImportant }) {
   return (
-    <ul className="todo-list">
+    <ListGroup className="todo-list" as="ul">
         {
             list.length > 0 && 
             list.map(item => {
                 return (
-                    <li className={
+                    <ListGroup.Item className={
                         `todo-list__item 
+                        text-dark
                         ${item.done? 'done' : ''}
                         ${item.important? 'important' : ''}`} 
-                        key={item.id}>
+                        key={item.id}
+                        as="li">
                         <Task 
                             {...item} 
                             deleteTask={deleteTask}
                             toggleDone={toggleDone}
                             toggleImportant={toggleImportant}/>
-                    </li>
+                    </ListGroup.Item>
                 )
             })
         }
-    </ul>
+    </ListGroup>
   );
 }
 

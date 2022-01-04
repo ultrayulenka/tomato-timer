@@ -1,10 +1,28 @@
 import './controls.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBackward, faForward, faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
+import { ButtonGroup, Button } from 'react-bootstrap';
 
 function Controls({ isRunning = false, onPauseClick = () => {}, onNextClick = () => {}, onPrevClick = () => {} }) {
     return (
-        <div className='controls'>
+        <ButtonGroup className='controls'>
+            <Button size="lg" variant="outline-dark">
+                <FontAwesomeIcon className='controls__icon' icon={faBackward}/>
+            </Button>
+            <Button size="lg" variant="outline-dark">
+                <FontAwesomeIcon  className='controls__icon' icon={isRunning? faPause : faPlay}/>
+            </Button>
+            <Button size="lg" variant="outline-dark">
+                <FontAwesomeIcon className='controls__icon' icon={faForward}/>
+            </Button>
+        </ButtonGroup>
+    );
+}
+  
+export default Controls;
+
+/*
+<div className='controls'>
             <button className='play-btn'
                 onClick={onPrevClick}>
                 <FontAwesomeIcon className='controls__icon' icon={faBackward}/>
@@ -18,7 +36,4 @@ function Controls({ isRunning = false, onPauseClick = () => {}, onNextClick = ()
                 <FontAwesomeIcon className='controls__icon' icon={faForward}/>
             </button>
         </div>
-    );
-}
-  
-export default Controls;
+*/

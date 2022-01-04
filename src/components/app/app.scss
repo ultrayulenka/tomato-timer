@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;300;400;700&display=swap');
+@import "../../scss/custom.scss";
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,8 +8,6 @@
 }
 
 .app {
-  display: flex;
-  justify-content: space-between;
   font-family: Sora, sans-serif;
   background-color: #F6EEEE;
   color: #7E5757;
@@ -23,4 +23,12 @@
   text-transform: uppercase;
   font-weight: normal;
   color: #654747;
+}
+
+
+.btn-primary:hover, .btn-primary:active,
+.btn-outline-primary:hover, .btn-outline-primary:active,
+.btn-danger:hover, .btn-danger:active,
+.btn-outline-danger:hover, .btn-outline-danger:active {
+    color: #fff;
 }

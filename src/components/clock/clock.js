@@ -1,5 +1,5 @@
 import './clock.scss';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 function Clock({ min = 0, sec = 0, isRunning = false, changeTime = () => {} }) {
 
