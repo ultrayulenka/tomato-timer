@@ -5,7 +5,7 @@ import Controls from '../controls';
 import RoundsIndicator from '../rounds-indicator';
 import { useState } from 'react';
 import { useEffect } from 'react/cjs/react.development';
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap';
 
 function Timer() {
     const [isRunning, setIsRunning] = useState(false);
@@ -121,7 +121,7 @@ function Timer() {
                         });
                         restartRound();
                     }}/>
-                <Col md={5}>
+                <Col md={4}>
                     <Clock
                         min={time.min}
                         sec={time.sec}
@@ -129,7 +129,7 @@ function Timer() {
                         changeTime={changeTime} />
                     <div className='timer__controls'></div>
                 </Col>
-                <Col md={7}>
+                <Col md={8}>
                     <Controls 
                         isRunning={isRunning}
                         onPauseClick={() => setIsRunning(prev => !prev)}

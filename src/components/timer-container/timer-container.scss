@@ -2,3 +2,22 @@
     background-color: #FA8888;
     height: 100vh;
 }
+
+.settings-btn {
+    border: none;
+    cursor: none;
+}
+
+.settings-btn:hover {
+    background: none;
+}
+
+.settings-btn__icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.settings-btn__icon:hover {
+    color: #ffffff;
+    transition: ease-out .5s color;
+}

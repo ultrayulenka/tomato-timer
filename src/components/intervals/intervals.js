@@ -10,7 +10,7 @@ function Intervals({ intervals = [], current = '', onChangeInterval = () => {}})
                 intervals.map(interval => {
                     return (
                         <ToggleButton
-                            className="text-light"
+                           // className="text-dark"
                             key={interval.name}
                             id={`radio-${interval.name}`}
                             type="radio"
@@ -31,18 +31,3 @@ function Intervals({ intervals = [], current = '', onChangeInterval = () => {}})
 }
   
 export default Intervals;
-/*
-<ul className='timer__switch'>
-            {
-                intervals.map((interval) => (
-                    <li
-                        key={interval.name}
-                        className={`timer__state
-                        ${current === interval.name? 'timer__state_current' : ''}`}
-                        onClick={() => onChangeInterval(interval.name)}>
-                        {interval.name}
-                    </li>
-                ))
-            }
-        </ul>
-*/

@@ -1,6 +1,8 @@
 import { useRef } from 'react';
-import Button from '../button';
 import './input-form.scss';
+import { Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 function InputForm({ onSubmit }) {
     const inputEl = useRef(null);
@@ -14,9 +16,9 @@ function InputForm({ onSubmit }) {
             <input className="form__input" ref={inputEl} placeholder="Type here" type="text"/>
             <Button
                 className='form__btn'
-                color='info'
+                variant="dark"
                 type='submit'>
-                Add
+                <FontAwesomeIcon icon={faPlus}/>
             </Button>
         </form>
     );
