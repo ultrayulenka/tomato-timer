@@ -3,44 +3,12 @@ import Clock from '../clock';
 import Intervals from '../intervals';
 import Controls from '../controls';
 import RoundsIndicator from '../rounds-indicator';
-import { useState } from 'react';
-import { useEffect } from 'react/cjs/react.development';
+import { useState, useEffect, useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import TimerContext from '../timer-context';
 
 function Timer() {
-    const [isRunning, setIsRunning] = useState(false);
-    const [time, setTime] = useState({
-        min: 0,
-        sec: 30
-    });
-    const intervals = [{
-        name: 'Work',
-        duration: {
-            min: 0,
-            sec: 5
-        }
-    },
-    {
-        name: 'Break',
-        duration: {
-            min: 0,
-            sec: 5
-        }
-    },
-    {
-        name: 'Rest',
-        duration: {
-            min: 0,
-            sec: 30
-        }
-    }];
-
-    const [rounds, setRounds] = useState({
-        all: 12,
-        done: 0,
-        betweenRest: 4,
-        current: 'Work'
-    });
+    const { rounds, setRounds, time, setTime, intervals, isRunning, setIsRunning } = useContext(TimerContext);
 
     const getNextRound = () => {
         if(rounds.current === 'Break' || rounds.current === 'Rest') {
@@ -61,7 +29,7 @@ function Timer() {
     const skipRound = () => {
         setIsRunning(false);
         setRounds(prev => {
-            return getUpdatedRounds(prev, true);
+            return getUpdatedRounds(prev, prev.current === 'Work');
         })
     }
 
@@ -83,34 +51,10 @@ function Timer() {
         }
     }, [time])
 
-    const changeTime = () => {
-        setTime(prev => {
-            const { min, sec } = prev;
-
-            if(sec > 1) {
-                return {
-                    min,
-                    sec: sec - 1
-                }
-            } else if(min > 0) {
-                return {
-                    min: min - 1,
-                    sec: 59
-                }
-            } else {
-                return {
-                    min: 0,
-                    sec: 0
-                }
-            }
-        })
-    }
-
     return (
         <Container className="timer p-0">
             <Row>
                 <Intervals 
-                    intervals={intervals}
                     current={rounds.current}
                     onChangeInterval={(interval) => {
                         setRounds(prev => {
@@ -122,11 +66,7 @@ function Timer() {
                         restartRound();
                     }}/>
                 <Col md={4}>
-                    <Clock
-                        min={time.min}
-                        sec={time.sec}
-                        isRunning={isRunning}
-                        changeTime={changeTime} />
+                    <Clock isRunning={isRunning} />
                     <div className='timer__controls'></div>
                 </Col>
                 <Col md={8}>

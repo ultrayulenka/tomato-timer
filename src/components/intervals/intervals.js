@@ -1,7 +1,10 @@
 import './intervals.scss';
 import { ButtonGroup, ToggleButton } from 'react-bootstrap';
+import TimerContext from '../timer-context';
+import { useContext } from 'react';
 
-function Intervals({ intervals = [], current = '', onChangeInterval = () => {}}) {
+function Intervals({ current = '', onChangeInterval = () => {}}) {
+    const { intervals } = useContext(TimerContext);
 
     return (
         intervals.length?
@@ -10,7 +13,6 @@ function Intervals({ intervals = [], current = '', onChangeInterval = () => {}})
                 intervals.map(interval => {
                     return (
                         <ToggleButton
-                           // className="text-dark"
                             key={interval.name}
                             id={`radio-${interval.name}`}
                             type="radio"

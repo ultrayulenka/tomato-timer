@@ -1,12 +1,33 @@
 import './clock.scss';
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
+import TimerContext from '../timer-context';
 
-function Clock({ min = 0, sec = 0, isRunning = false, changeTime = () => {} }) {
+function Clock({ isRunning = false }) {
+    const { time, setTime } = useContext(TimerContext)
 
     useEffect(() => {
         if(isRunning) {
             const interval = setInterval(() => {
-                changeTime();
+                setTime(prev => {
+                    const { min, sec } = prev;
+        
+                    if(sec > 0) {
+                        return {
+                            min,
+                            sec: sec - 1
+                        }
+                    } else if(min > 0) {
+                        return {
+                            min: min - 1,
+                            sec: 59
+                        }
+                    } else {
+                        return {
+                            min: 0,
+                            sec: 0
+                        }
+                    }
+                })
             }, 1000)
 
             return () => clearInterval(interval);
@@ -16,9 +37,9 @@ function Clock({ min = 0, sec = 0, isRunning = false, changeTime = () => {} }) {
     return (
         <div className="clock-box">
             <div className="clock">
-                <span className="minutes">{min < 10? `0${min}` : min}</span>
+                <span className="minutes">{time.min < 10? `0${time.min}` : time.min}</span>
                 <span>:</span>
-                <span className="seconds">{sec < 10? `0${sec}` : sec}</span>
+                <span className="seconds">{time.sec < 10? `0${time.sec}` : time.sec}</span>
             </div>
         </div>
     );
