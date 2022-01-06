@@ -50,10 +50,8 @@ function TimerContainer() {
   });
 
   useEffect(() => {
-    if(!isRunning) {
-      setTime({...intervals.find(interval => interval.name === rounds.current).duration})
-    }
-  }, [intervals])
+    setTime({...intervals.find(interval => interval.name === rounds.current).duration})
+  }, [intervals, rounds])
 
   return (
     <section className="app__section timer-container">

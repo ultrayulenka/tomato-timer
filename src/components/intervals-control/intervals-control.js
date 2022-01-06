@@ -1,6 +1,6 @@
 import { FormControl, Row, Col } from 'react-bootstrap';
 import TimerContext from '../timer-context';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import './intervals-control.scss'
 
 function IntervalsConrol() {

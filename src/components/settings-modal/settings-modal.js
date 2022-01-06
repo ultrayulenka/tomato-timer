@@ -1,7 +1,11 @@
 import { Modal, Button, Container, Row, Col, FormCheck, FormControl } from 'react-bootstrap';
+import TimerContext from '../timer-context';
+import { useContext } from 'react';
 import IntervalsControl from '../intervals-control';
 
-function SettingsModal({isShown, onClose, onSave}) {
+function SettingsModal({isShown, onClose}) {
+    const { rounds, setRounds } = useContext(TimerContext);
+
   return (
     <Modal show={isShown} onHide={onClose}>
         <Modal.Header closeButton>
@@ -31,16 +35,21 @@ function SettingsModal({isShown, onClose, onSave}) {
                         <h6>Rest Interval</h6>
                     </Col>
                     <Col md={4}>
-                        <FormControl type="number" value={0} />
+                        <FormControl type="number" defaultValue={rounds.betweenRest} 
+                            onChange={event => setRounds(prev => {return {...prev, betweenRest: event.target.value}})}/>
+                    </Col>
+                </Row>
+                <Row className="mb-3">
+                    <Col>
+                        <h6>Number of rounds</h6>
+                    </Col>
+                    <Col md={4}>
+                        <FormControl type="number" defaultValue={rounds.all} 
+                            onChange={event => setRounds(prev => {return {...prev, all: event.target.value}})}/>
                     </Col>
                 </Row>
             </Container>
         </Modal.Body>
-        <Modal.Footer>
-            <Button variant="outline-primary" onClick={onSave}>
-            OK
-            </Button>
-        </Modal.Footer>
     </Modal>
   );
 }

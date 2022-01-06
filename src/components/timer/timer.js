@@ -3,7 +3,7 @@ import Clock from '../clock';
 import Intervals from '../intervals';
 import Controls from '../controls';
 import RoundsIndicator from '../rounds-indicator';
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import TimerContext from '../timer-context';
 
@@ -37,10 +37,6 @@ function Timer() {
         setIsRunning(false);
         setTime({...intervals.find(interval => interval.name === rounds.current).duration})
     }
-
-    useEffect(() => {
-        setTime({...intervals.find(interval => interval.name === rounds.current).duration})
-    }, [rounds]);
 
     useEffect(() => {
         if(time.min === 0 && time.sec === 0) {
