@@ -10,6 +10,12 @@ import TimerContext from '../timer-context';
 function Timer() {
     const { rounds, setRounds, time, setTime, intervals, isRunning, setIsRunning } = useContext(TimerContext);
 
+    const notify = () => {
+        const notification = new Notification('Message from Tomato Timer', {
+            body: rounds.current === 'Work'? 'Time to take a break' : 'Time to work'
+        })
+    }
+
     const getNextRound = () => {
         if(rounds.current === 'Break' || rounds.current === 'Rest') {
             return 'Work'
@@ -41,6 +47,9 @@ function Timer() {
     useEffect(() => {
         if(time.min === 0 && time.sec === 0) {
             setIsRunning(false);
+            if(Notification.permission === "granted") {
+                notify();
+            }
             setRounds(prev => {
                 return getUpdatedRounds(prev, prev.current === 'Work');
             })

@@ -1,4 +1,4 @@
-import { Modal, Button, Container, Row, Col, FormCheck, FormControl } from 'react-bootstrap';
+import { Modal, Container, Row, Col, FormCheck, FormControl } from 'react-bootstrap';
 import TimerContext from '../timer-context';
 import { useContext } from 'react';
 import IntervalsControl from '../intervals-control';
