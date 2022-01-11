@@ -22,22 +22,22 @@ function TimerContainer() {
     {
       name: 'Work',
       duration: {
-        min: 0,
-        sec: 5
+        min: 25,
+        sec: 0
       }
     },
     {
       name: 'Break',
       duration: {
-        min: 0,
-        sec: 5
+        min: 5,
+        sec: 0
       }
     },
     {
       name: 'Rest',
       duration: {
-        min: 0,
-        sec: 30
+        min: 15,
+        sec: 0
       }
     }
   ]);
