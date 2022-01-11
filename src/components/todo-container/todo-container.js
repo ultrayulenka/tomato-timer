@@ -4,12 +4,16 @@ import InputForm from '../input-form';
 import TodoHeader from '../todo-header';
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 function TodoContainer() {
     const [tasks, setTasks ] = useState([]);
+    const [isFormVisible, setIsFormVisible] = useState(false);
 
-    const addTask = (title) => {
+    const addTask = ({ title, estimation = null}) => {
+        console.log(title, estimation);
         setTasks(prev => {
             return [
                 ...prev,
@@ -17,10 +21,12 @@ function TodoContainer() {
                     title,
                     id: uuidv4(),
                     important: false,
-                    done: false
+                    done: false,
+                    estimation
                 }
             ]
         })
+        setIsFormVisible(false)
     }
 
     const deleteTask = (id) => {
@@ -61,7 +67,20 @@ function TodoContainer() {
                 deleteTask={deleteTask}
                 toggleDone={toggleDone}
                 toggleImportant={toggleImportant}/>
-            <InputForm onSubmit={addTask} />
+            {
+                isFormVisible?
+                <InputForm 
+                    onSubmit={addTask}
+                    onClose={() => setIsFormVisible(false)}/>
+                :
+                <Button
+                    variant="outline-dark" 
+                    className="w-100"
+                    onClick={() => setIsFormVisible(true)}>
+                    <FontAwesomeIcon icon={faPlusCircle}/>
+                    <span className="btn-text">Add Task</span>
+                </Button>
+            }
         </Container>
     </section>
     );

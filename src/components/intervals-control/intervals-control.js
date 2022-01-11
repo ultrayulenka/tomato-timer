@@ -35,11 +35,13 @@ function IntervalsConrol() {
                 <h6>{name}</h6>
                 <Row>
                   <Col md={6}>
-                    <FormControl className="pr-0" type="number" defaultValue={duration.min} 
+                    <FormControl className="pr-0" type="number" defaultValue={duration.min}
+                      min={0} 
                       onChange={event => onChange({event, name, changableValue: 'min'})}/>
                   </Col>
                   <Col md={6}>
-                    <FormControl className="pr-0" type="number" defaultValue={duration.sec} 
+                    <FormControl className="pr-0" type="number" defaultValue={duration.sec}
+                      min={0} 
                       onChange={event => onChange({event, name, changableValue: 'sec'})}/>
                   </Col>
                 </Row>

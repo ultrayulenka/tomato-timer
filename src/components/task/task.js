@@ -1,14 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamation, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-//import Button from '../button';
-import { Button } from 'react-bootstrap'
+import { Button, Badge } from 'react-bootstrap'
 import './task.css'
+import tomato from './tomato.svg'
 
-function Task({ id, title, deleteTask, toggleDone, toggleImportant }) {
+function Task({ id, title, estimation = 0, deleteTask, toggleDone, toggleImportant }) {
     return (
         <>
             <span className="text"
                 onClick={() => toggleDone(id)}>{title}</span>
+            {estimation && 
+                <Badge bg="danger" pill>{estimation}</Badge>
+            }
             <div className='buttons'>
                 <Button size="sm" variant="outline-primary"
                     className="me-1"

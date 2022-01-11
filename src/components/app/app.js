@@ -22,7 +22,7 @@ function App() {
     <div className="app">
       <Container fluid className="p-0">
         <Row>
-          <Col md={4}>
+          <Col md={4} className="pr-0">
             <TodoContainer />
           </Col>
           <Col md={8}>

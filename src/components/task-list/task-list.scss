@@ -13,7 +13,7 @@
         justify-content: space-between;
         align-items: center;
 
-        &.done {
+        &.done .text {
             text-decoration: line-through;
         }
     

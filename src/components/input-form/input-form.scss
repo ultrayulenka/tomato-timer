@@ -1,31 +1,15 @@
-.form {
-    margin-top: 15px;
-    display: flex;
-    justify-content: space-between;
-    height: 40px;
+.todo-form {
+    background-color: #fff;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
 
-    &__input {
-        border: none;
-        background-color: inherit;
-        padding: 0.25rem 0.75rem;
-        color: inherit;
-        font-size: 1rem;
-        width: 80%;
-        box-shadow: 0px 0px 8px 0px #d8c5c586;
-        border-radius: 0.2rem;
-        background-color: #FFFFFF;
+    &__buttons {
+        display: flex;
+        justify-content: flex-end;
 
-        &:focus {
-            outline: none;
-            box-shadow: 0px 0px 8px 0px #f7d3857c;
+        button + button{
+            margin-left: 10px;
         }
-    }
-
-    &__btn {
-        width: 15%;
-        text-transform: uppercase;
-        font-weight: bold;
-        box-shadow: 0px 0px 8px 0px #d8c5c586;
-        border-radius: 0.2rem;
     }
 }

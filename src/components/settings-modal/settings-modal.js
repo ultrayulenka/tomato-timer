@@ -19,7 +19,7 @@ function SettingsModal({isShown, onClose}) {
                         <h6>Auto start Breaks</h6>
                     </Col>
                     <Col md={3}>
-                        <FormCheck type="switch"  className="modal-switch"/>
+                        <FormCheck type="switch"  className="lg-switch"/>
                     </Col>
                 </Row>
                 <Row className="mb-3">
@@ -27,7 +27,7 @@ function SettingsModal({isShown, onClose}) {
                         <h6>Auto start Tomatos</h6>
                     </Col>
                     <Col md={3} className="float-right">
-                        <FormCheck type="switch" className="modal-switch" />
+                        <FormCheck type="switch" className="lg-switch" />
                     </Col>
                 </Row>
                 <Row className="mb-3">
