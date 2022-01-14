@@ -1,6 +1,7 @@
 import './input-form.scss';
 import { useRef, useState } from 'react';
-import { Button, Form, Row, Col, FormCheck } from 'react-bootstrap';
+import { Button, Form, FormCheck } from 'react-bootstrap';
+import GridLayout from '../grid-layout';
 
 function InputForm({ onSubmit = () => {}, onClose = () => {} }) {
     const [value, setValue] = useState('');
@@ -18,27 +19,23 @@ function InputForm({ onSubmit = () => {}, onClose = () => {} }) {
             }}>
             <Form.Control className="mb-2" type="text" placeholder="What needs to be done?"
                 onChange={e => setValue(e.target.value)}/>
-            <Row className="mb-3">
-                <Col md={9}>
-                    <Form.Label>{estimationEnabled? 'Disable' : 'Enable'} estimation</Form.Label>
-                </Col>
-                <Col md={3}>
-                    <FormCheck type="switch" className="lg-switch" value={estimationEnabled} 
-                        onChange={() => setEstimationEnabled(prev => !prev)}/>
-                </Col>
-            </Row>
-            {
-                estimationEnabled &&
-                <Row className="mb-3">
-                    <Col md={9}>
-                        <Form.Label>Estimation in Tomatos</Form.Label>
-                    </Col>
-                    <Col md={3}>
-                        <Form.Control type="number" min={1} defaultValue={1} ref={estimate}/>
-                    </Col>
-                </Row>
-            }
-            <div className="todo-form__buttons">
+            <GridLayout
+                rows={estimationEnabled? 2 : 1} col={2}
+                proportions={[9, 3]}
+                rowGap={3}>
+                <Form.Label>{estimationEnabled? 'Disable' : 'Enable'} estimation</Form.Label>
+                <FormCheck type="switch" className="lg-switch" value={estimationEnabled} 
+                    onChange={() => setEstimationEnabled(prev => !prev)}/>
+                {
+                    estimationEnabled &&
+                    <Form.Label>Estimation in Tomatos</Form.Label>
+                }
+                {
+                    estimationEnabled &&
+                    <Form.Control type="number" min={1} defaultValue={1} ref={estimate}/>
+                }
+            </GridLayout>
+            <div className="todo-form__buttons mt-3">
                 <Button size="sm" variant="light"
                     onClick={onClose}>
                     Close

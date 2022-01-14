@@ -1,4 +1,5 @@
 import { FormControl, Row, Col } from 'react-bootstrap';
+import GridLayout from '../grid-layout';
 import TimerContext from '../timer-context';
 import { useContext } from 'react';
 import './intervals-control.scss'
@@ -33,18 +34,14 @@ function IntervalsConrol() {
             return (
               <Col key={name}>
                 <h6>{name}</h6>
-                <Row>
-                  <Col md={6}>
-                    <FormControl className="pr-0" type="number" defaultValue={duration.min}
-                      min={0} 
-                      onChange={event => onChange({event, name, changableValue: 'min'})}/>
-                  </Col>
-                  <Col md={6}>
-                    <FormControl className="pr-0" type="number" defaultValue={duration.sec}
+                <GridLayout rows={1} col={2}>
+                  <FormControl className="pr-0" type="number" defaultValue={duration.min}
+                    min={0} 
+                    onChange={event => onChange({event, name, changableValue: 'min'})}/>
+                  <FormControl className="pr-0" type="number" defaultValue={duration.sec}
                       min={0} 
                       onChange={event => onChange({event, name, changableValue: 'sec'})}/>
-                  </Col>
-                </Row>
+                </GridLayout>
               </Col>
             )
           })

@@ -2,6 +2,7 @@ import { Modal, Container, Row, Col, FormCheck, FormControl } from 'react-bootst
 import TimerContext from '../timer-context';
 import { useContext } from 'react';
 import IntervalsControl from '../intervals-control';
+import GridLayout from '../grid-layout';
 
 function SettingsModal({isShown, onClose}) {
     const { rounds, setRounds } = useContext(TimerContext);
@@ -14,40 +15,21 @@ function SettingsModal({isShown, onClose}) {
         <Modal.Body>
             <Container>
                 <IntervalsControl />
-                <Row className="mb-3">
-                    <Col>
-                        <h6>Auto start Breaks</h6>
-                    </Col>
-                    <Col md={3}>
-                        <FormCheck type="switch"  className="lg-switch"/>
-                    </Col>
-                </Row>
-                <Row className="mb-3">
-                    <Col>
-                        <h6>Auto start Tomatos</h6>
-                    </Col>
-                    <Col md={3} className="float-right">
-                        <FormCheck type="switch" className="lg-switch" />
-                    </Col>
-                </Row>
-                <Row className="mb-3">
-                    <Col>
-                        <h6>Rest Interval</h6>
-                    </Col>
-                    <Col md={4}>
-                        <FormControl type="number" defaultValue={rounds.betweenRest} 
-                            onChange={event => setRounds(prev => {return {...prev, betweenRest: event.target.value}})}/>
-                    </Col>
-                </Row>
-                <Row className="mb-3">
-                    <Col>
-                        <h6>Number of rounds</h6>
-                    </Col>
-                    <Col md={4}>
-                        <FormControl type="number" defaultValue={rounds.all} 
-                            onChange={event => setRounds(prev => {return {...prev, all: event.target.value}})}/>
-                    </Col>
-                </Row>
+                <GridLayout 
+                    rows={4} col={2}
+                    proportions={[9, 3]}
+                    rowGap={3}>
+                    <h6>Auto start Breaks</h6>
+                    <FormCheck type="switch"  className="lg-switch"/>
+                    <h6>Auto start Tomatos</h6>
+                    <FormCheck type="switch" className="lg-switch" />
+                    <h6>Rest Interval</h6>
+                    <FormControl type="number" defaultValue={rounds.betweenRest} 
+                        onChange={event => setRounds(prev => {return {...prev, betweenRest: event.target.value}})}/>
+                    <h6>Number of rounds</h6>
+                    <FormControl type="number" defaultValue={rounds.all} 
+                        onChange={event => setRounds(prev => {return {...prev, all: event.target.value}})}/>
+                </GridLayout>
             </Container>
         </Modal.Body>
     </Modal>

@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamation, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Button, Badge } from 'react-bootstrap'
 import './task.css'
-import tomato from './tomato.svg'
 
 function Task({ id, title, estimation = 0, deleteTask, toggleDone, toggleImportant }) {
     return (
