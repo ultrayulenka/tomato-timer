@@ -4,10 +4,10 @@ import TimerContext from '../timer-context';
 import ProgressBar from '../progress-bar';
 
 function Clock({ isRunning = false }) {
-    const { time, setTime, intervals, rounds } = useContext(TimerContext);
+    const { time, setTime, intervals, currentRound } = useContext(TimerContext);
 
     const getProgress = () => {
-        const {min, sec} = intervals.find(interval => interval.name === rounds.current).duration;
+        const {min, sec} = intervals.find(interval => interval.name === currentRound).duration;
         const total = min * 60 + sec;
         const current = time.min * 60 + time.sec;
         return (total - current) / total * 100;

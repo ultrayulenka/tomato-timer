@@ -3,9 +3,9 @@ import TimerContext from '../timer-context';
 import { useContext } from 'react';
 
 function RoundsIndicator() {
-    const {rounds: { done, all, betweenRest, current }} = useContext(TimerContext);
+    const {rounds: { done, all, betweenRest }, currentRound} = useContext(TimerContext);
 
-    const tillRest = current === 'Rest'? 0 : betweenRest - done % betweenRest
+    const tillRest = currentRound === 'Rest'? 0 : betweenRest - done % betweenRest
     
     return (
         <p className="rounds-indicator">

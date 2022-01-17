@@ -24,7 +24,7 @@ function InputForm({ onSubmit = () => {}, onClose = () => {} }) {
                 proportions={[9, 3]}
                 rowGap={3}>
                 <Form.Label>{estimationEnabled? 'Disable' : 'Enable'} estimation</Form.Label>
-                <FormCheck type="switch" className="lg-switch" value={estimationEnabled} 
+                <FormCheck type="switch" className="lg-switch" checked={estimationEnabled} 
                     onChange={() => setEstimationEnabled(prev => !prev)}/>
                 {
                     estimationEnabled &&

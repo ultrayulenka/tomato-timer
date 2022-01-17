@@ -8,16 +8,16 @@ import { Container, Row, Col } from 'react-bootstrap';
 import TimerContext from '../timer-context';
 
 function Timer() {
-    const { rounds, setRounds, time, setTime, intervals, isRunning, setIsRunning } = useContext(TimerContext);
+    const { rounds, setRounds, time, setTime, intervals, isRunning, setIsRunning, currentRound, setCurrentRound } = useContext(TimerContext);
 
     const notify = () => {
         const notification = new Notification('Message from Tomato Timer', {
-            body: rounds.current === 'Work'? 'Time to take a break' : 'Time to work'
+            body: currentRound === 'Work'? 'Time to take a break' : 'Time to work'
         })
     }
 
-    const getNextRound = () => {
-        if(rounds.current === 'Break' || rounds.current === 'Rest') {
+    const getNextRound = (current) => {
+        if(current === 'Break' || current === 'Rest') {
             return 'Work'
         } else {
             return (rounds.done + 1) % rounds.betweenRest === 0? 'Rest' : 'Break';
@@ -27,21 +27,21 @@ function Timer() {
     const getUpdatedRounds = (rounds, isWorkCompleted = false) => {
         return {
             ...rounds,
-            done: isWorkCompleted? rounds.done + 1 : rounds.done,
-            current: getNextRound()
+            done: isWorkCompleted? rounds.done + 1 : rounds.done
         }
     }
 
     const skipRound = () => {
         setIsRunning(false);
         setRounds(prev => {
-            return getUpdatedRounds(prev, prev.current === 'Work');
+            return getUpdatedRounds(prev, currentRound === 'Work');
         })
+        setCurrentRound(prev => getNextRound(prev));
     }
 
     const restartRound = () => {
         setIsRunning(false);
-        setTime({...intervals.find(interval => interval.name === rounds.current).duration})
+        setTime({...intervals.find(interval => interval.name === currentRound).duration})
     }
 
     useEffect(() => {
@@ -51,8 +51,9 @@ function Timer() {
                 notify();
             }
             setRounds(prev => {
-                return getUpdatedRounds(prev, prev.current === 'Work');
+                return getUpdatedRounds(prev, currentRound === 'Work');
             })
+            setCurrentRound(prev => getNextRound(prev));
         }
     }, [time])
 
@@ -60,14 +61,9 @@ function Timer() {
         <Container className="timer p-0">
             <Row>
                 <Intervals 
-                    current={rounds.current}
+                    current={currentRound}
                     onChangeInterval={(interval) => {
-                        setRounds(prev => {
-                            return {
-                                ...prev,
-                                current: interval
-                            }
-                        });
+                        setCurrentRound(interval);
                         restartRound();
                     }}/>
                 <Col md={5}>
@@ -82,7 +78,7 @@ function Timer() {
                     <RoundsIndicator 
                         all={rounds.all}
                         done={rounds.done}
-                        tillRest={rounds.current === 'Rest'? 0 : rounds.betweenRest - rounds.done % rounds.betweenRest}/>
+                        tillRest={currentRound === 'Rest'? 0 : rounds.betweenRest - rounds.done % rounds.betweenRest}/>
                 </Col>
             </Row>
         </Container>

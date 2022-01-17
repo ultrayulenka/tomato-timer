@@ -42,21 +42,32 @@ function TimerContainer() {
     }
   ]);
 
+  const [currentRound, setCurrentRound] = useState('Work');
+
   const [rounds, setRounds] = useState({
     all: 12,
     done: 0,
     betweenRest: 4,
-    current: 'Work'
+    autoStartWork: false,
+    autoStartBreaks: false
   });
 
   useEffect(() => {
-    setTime({...intervals.find(interval => interval.name === rounds.current).duration})
-  }, [intervals, rounds])
+    setTime({...intervals.find(interval => interval.name === currentRound).duration});
+    if((currentRound === 'Work' && rounds.autoStartWork)
+    || ((currentRound === 'Break' || currentRound === 'Rest') && rounds.autoStartBreaks)) {
+        setIsRunning(true)
+    }
+  }, [intervals, currentRound])
 
   return (
     <section className="app__section timer-container">
       <TimerContext.Provider value={{
-        time, setTime, intervals, setIntervals, rounds, setRounds, isRunning, setIsRunning
+        time, setTime, 
+        intervals, setIntervals, 
+        rounds, setRounds, 
+        isRunning, setIsRunning, 
+        currentRound, setCurrentRound
         }}>
         <Container>
           <div className="d-flex justify-content-between">

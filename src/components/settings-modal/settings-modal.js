@@ -7,6 +7,30 @@ import GridLayout from '../grid-layout';
 function SettingsModal({isShown, onClose}) {
     const { rounds, setRounds } = useContext(TimerContext);
 
+    const toggleAutoStart = ({hint = ''}) => {
+        switch(hint) {
+            case 'Work': {
+                setRounds(prev => {
+                    return {
+                        ...prev,
+                        autoStartWork: !prev.autoStartWork
+                    }
+                })
+                break;
+            }
+            case 'Break': {
+                setRounds(prev => {
+                    return {
+                        ...prev,
+                        autoStartBreaks: !prev.autoStartBreaks
+                    }
+                })
+                break;
+            }
+            default: return;
+        }
+    }
+
   return (
     <Modal show={isShown} onHide={onClose}>
         <Modal.Header closeButton>
@@ -20,9 +44,11 @@ function SettingsModal({isShown, onClose}) {
                     proportions={[9, 3]}
                     rowGap={3}>
                     <h6>Auto start Breaks</h6>
-                    <FormCheck type="switch"  className="lg-switch"/>
+                    <FormCheck type="switch"  className="lg-switch" checked={rounds.autoStartBreaks}
+                        onChange={() => toggleAutoStart({hint: 'Break'})}/>
                     <h6>Auto start Tomatos</h6>
-                    <FormCheck type="switch" className="lg-switch" />
+                    <FormCheck type="switch" className="lg-switch" checked={rounds.autoStartWork}
+                        onChange={() => toggleAutoStart({hint: 'Work'})}/>
                     <h6>Rest Interval</h6>
                     <FormControl type="number" defaultValue={rounds.betweenRest} 
                         onChange={event => setRounds(prev => {return {...prev, betweenRest: event.target.value}})}/>
