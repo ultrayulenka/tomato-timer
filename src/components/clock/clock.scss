@@ -1,15 +1,14 @@
 .clock-box {
     margin: 10px 20px;
+    position: relative;
 }
 
 .clock {
-    border-radius: 50%;
-    height: 40vh;
-    width: 40vh;
-    background-color: #f547479f;
-    display: flex;
-    justify-content: center;
-    padding-top: 10vh;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    text-align: center;
     color: #FFFFFF;
-    font-size: 3rem;
+    font-size: 2.5rem;
+    transform: translate(-50%, -32px);
 }

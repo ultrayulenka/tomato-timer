@@ -70,11 +70,10 @@ function Timer() {
                         });
                         restartRound();
                     }}/>
-                <Col md={4}>
+                <Col md={5}>
                     <Clock isRunning={isRunning} />
-                    <div className='timer__controls'></div>
                 </Col>
-                <Col md={8}>
+                <Col md={7}>
                     <Controls 
                         isRunning={isRunning}
                         onPauseClick={() => setIsRunning(prev => !prev)}
