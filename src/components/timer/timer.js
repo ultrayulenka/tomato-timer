@@ -6,9 +6,24 @@ import RoundsIndicator from '../rounds-indicator';
 import { useEffect, useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import TimerContext from '../timer-context';
+import TodoTasksContext from '../todo-tasks-context';
 
 function Timer() {
-    const { rounds, setRounds, time, setTime, intervals, isRunning, setIsRunning, currentRound, setCurrentRound } = useContext(TimerContext);
+    const { 
+        rounds, 
+        setRounds, 
+        time, 
+        setTime, 
+        intervals, 
+        isRunning, 
+        setIsRunning, 
+        currentRound, 
+        setCurrentRound 
+    } = useContext(TimerContext);
+
+    const {
+        setTasks
+    } = useContext(TodoTasksContext);
 
     const notify = () => {
         const notification = new Notification('Message from Tomato Timer', {
@@ -49,6 +64,23 @@ function Timer() {
             setIsRunning(false);
             if(Notification.permission === "granted") {
                 notify();
+            }
+            if(currentRound === 'Work') {
+                setTasks(prev => {
+                    const activeIndex = prev.findIndex(item => item.active);
+                    if(activeIndex < 0) return [...prev];
+                    return [
+                        ...prev.slice(0, activeIndex),
+                        {
+                            ...prev[activeIndex],
+                            estimation: {
+                                ...prev[activeIndex].estimation,
+                                done: prev[activeIndex].estimation.done + 1
+                            }
+                        },
+                        ...prev.slice(activeIndex + 1)
+                    ]
+                })
             }
             setRounds(prev => {
                 return getUpdatedRounds(prev, currentRound === 'Work');

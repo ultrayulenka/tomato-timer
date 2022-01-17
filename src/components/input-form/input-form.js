@@ -14,7 +14,7 @@ function InputForm({ onSubmit = () => {}, onClose = () => {} }) {
                 e.preventDefault();
                 onSubmit({ 
                     title: value, 
-                    estimation: estimationEnabled? estimate.current.value : null
+                    totalEstimation: estimationEnabled? estimate.current.value : null
                 });
             }}>
             <Form.Control className="mb-2" type="text" placeholder="What needs to be done?"

@@ -33,3 +33,7 @@
 .btn-outline-danger:hover, .btn-outline-danger:active {
     color: #fff;
 }
+
+.list-group-item + .list-group-item {
+  border-top-width: 1px; 
+}

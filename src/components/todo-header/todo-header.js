@@ -1,10 +1,22 @@
 import './todo-header.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useContext } from 'react';
 import { faEraser } from '@fortawesome/free-solid-svg-icons';
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import TodoTasksContext from '../todo-tasks-context';
 
-function TodoHeader({ todo = 0, all = 0, clearClick = () => {} }) {
-    const done = all - todo;
+function TodoHeader() {
+  const {
+    tasks,
+    setTasks
+  } = useContext(TodoTasksContext);
+
+  const done = tasks.filter(item => item.done).length;
+  const todo = tasks.length - done;
+
+  const removeDone = () => {
+    setTasks(prev => prev.filter(task => !task.done));
+  }
 
   return (
     <div className="todo-header">
@@ -22,7 +34,7 @@ function TodoHeader({ todo = 0, all = 0, clearClick = () => {} }) {
               className='btn-clear'
               size='sm'
               variant="dark"
-              onClick={clearClick}>
+              onClick={removeDone}>
               <FontAwesomeIcon icon={faEraser} />
             </Button>
           </OverlayTrigger>

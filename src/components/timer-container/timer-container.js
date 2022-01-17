@@ -7,7 +7,6 @@ import { Container, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCogs } from '@fortawesome/free-solid-svg-icons';
 
-
 function TimerContainer() {
   const [isSettingsShown, setIsSettingsShown] = useState(false);
 
